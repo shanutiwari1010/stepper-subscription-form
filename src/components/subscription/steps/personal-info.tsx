@@ -28,6 +28,7 @@ export default function PersonalInfo() {
 
   const form = useForm({
     resolver: zodResolver(personalInfoSchema),
+    mode: "onChange",
     defaultValues: {
       name: "",
       email: "",
@@ -41,12 +42,10 @@ export default function PersonalInfo() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-[hsl(213,96%,18%)]">
-          Personal info
-        </h1>
-        <p className="text-gray-400 text-sm">
+    <div className="gap-10 flex flex-col h-full">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold text-marine-blue">Personal info</h1>
+        <p className="text-cool-gray text-sm">
           Please provide your name, email address, and phone number.
         </p>
       </div>
@@ -54,68 +53,81 @@ export default function PersonalInfo() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 text-[hsl(213,96%,18%)]"
+          className="flex flex-col justify-between h-full text-marine-blue"
         >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g. Stephen King" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="space-y-6">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex justify-between h-5">
+                    <FormLabel>Name</FormLabel>
+                    <FormMessage />
+                  </div>
+                  <FormControl>
+                    <Input placeholder="e.g. Stephen King" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email Address</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g. stephenking@lorem.com"
-                    type="email"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex justify-between h-5">
+                    <FormLabel>Email Address</FormLabel>
+                    <FormMessage />
+                  </div>
+                  <FormControl>
+                    <Input
+                      placeholder="e.g. stephenking@lorem.com"
+                      type="email"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone Number</FormLabel>
-                <FormControl>
-                  <Input
-                    type="tel"
-                    placeholder="e.g. 1234567890"
-                    {...field}
-                    maxLength={10}
-                    onInput={(e) => {
-                      e.currentTarget.value = e.currentTarget.value.replace(
-                        /\D/g,
-                        ""
-                      ); 
-                      field.onChange(e); 
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex justify-between h-5">
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormMessage />
+                  </div>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      placeholder="e.g. 1234567890"
+                      {...field}
+                      maxLength={10}
+                      onInput={(e) => {
+                        e.currentTarget.value = e.currentTarget.value.replace(
+                          /\D/g,
+                          ""
+                        );
+                        field.onChange(e);
+                      }}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
 
           <div className="flex justify-end">
-            <Button type="submit" className="bg-[hsl(213,96%,18%)]">
+            <Button
+              type="submit"
+              size="lg"
+              className="bg-marine-blue hover:bg-marine-blue/90"
+              disabled={!form.formState.isValid}
+            >
               Next Step
             </Button>
           </div>
