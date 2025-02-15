@@ -25,9 +25,9 @@ export default function FormLayout() {
   };
 
   return (
-    <Card className="w-full max-w-[940px] p-4 md:p-4 grid grid-cols-1 md:grid-cols-[274px,1fr] gap-4 bg-white rounded-xl">
+    <Card className="w-full max-w-[56rem] min-h-[40rem] p-4 md:p-4 grid grid-cols-1 md:grid-cols-[274px,1fr] gap-4 bg-white rounded-xl">
       <StepSidebar />
-      <main className="p-4 md:p-8">
+      <main className="p-4 md:py-8 pb-2 md:pb-4 place-items-center">
         {renderStep()}
       </main>
     </Card>
