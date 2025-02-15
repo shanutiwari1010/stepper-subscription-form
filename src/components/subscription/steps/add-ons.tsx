@@ -9,53 +9,64 @@ export default function AddOns() {
     const newAddons = [...addons];
     newAddons[index] = {
       ...newAddons[index],
-      selected: !newAddons[index].selected
+      selected: !newAddons[index].selected,
     };
     setAddons(newAddons);
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-[hsl(213,96%,18%)]">Pick add-ons</h1>
-        <p className="text-gray-400">Add-ons help enhance your gaming experience.</p>
+    <div className="flex flex-col h-full gap-10 min-w-96">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold text-marine-blue">Pick add-ons</h1>
+        <p className="text-cool-gray text-sm">
+          Add-ons help enhance your gaming experience.
+        </p>
       </div>
 
-      <div className="space-y-4">
-        {addons.map((addon, index) => (
-          <div
-            key={addon.name}
-            className={`flex items-center justify-between p-4 border-2 rounded-lg hover:border-primary ${
-              addon.selected ? 'border-primary bg-gray-50' : ''
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <Checkbox
-                checked={addon.selected}
-                onCheckedChange={() => toggleAddon(index)}
-              />
-              <div>
-                <h3 className="font-medium text-[hsl(213,96%,18%)]">{addon.name}</h3>
-                <p className="text-sm text-gray-400">{addon.description}</p>
+      <div className="flex flex-col justify-between h-full">
+        <div className="space-y-4">
+          {addons.map((addon, index) => (
+            <div
+              key={addon.name}
+              className={`flex items-center justify-between p-4 border rounded-lg hover:border-purplish-blue ${
+                addon.selected ? "border-purplish-blue bg-alabaster" : ""
+              }`}
+            >
+              <div className="flex items-center gap-4">
+                <Checkbox
+                  checked={addon.selected}
+                  onCheckedChange={() => toggleAddon(index)}
+                />
+                <div>
+                  <h3 className="font-medium text-marine-blue ">
+                    {addon.name}
+                  </h3>
+                  <p className="text-sm text-cool-gray">{addon.description}</p>
+                </div>
               </div>
+              <p className=" text-marine-blue text-sm">
+                +${isYearly ? `${addon.price * 10}/yr` : `${addon.price}/mo`}
+              </p>
             </div>
-            <p className="text-primary">
-              +${isYearly ? `${addon.price * 10}/yr` : `${addon.price}/mo`}
-            </p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="flex justify-between">
-        <Button
-          variant="ghost"
-          onClick={() => setCurrentStep(2)}
-        >
-          Go Back
-        </Button>
-        <Button onClick={() => setCurrentStep(4)}>
-          Next Step
-        </Button>
+        <div className="flex justify-between">
+          <Button
+            variant="ghost"
+            onClick={() => setCurrentStep(2)}
+            className="text-cool-gray hover:bg-white hover:text-marine-blue pl-0"
+          >
+            Go Back
+          </Button>
+          <Button
+            size="lg"
+            className="bg-marine-blue hover:bg-marine-blue"
+            onClick={() => setCurrentStep(4)}
+          >
+            Next Step
+          </Button>
+        </div>
       </div>
     </div>
   );
