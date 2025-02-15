@@ -2,81 +2,113 @@ import { useSubscription } from "@/context/subscription";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { GamepadIcon, MonitorIcon, TrophyIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const plans = [
-  { name: 'Arcade', icon: GamepadIcon, monthlyPrice: 9 },
-  { name: 'Advanced', icon: MonitorIcon, monthlyPrice: 12 },
-  { name: 'Pro', icon: TrophyIcon, monthlyPrice: 15 },
+  { name: "Arcade", icon: "/assets/images/icon-arcade.svg", monthlyPrice: 9 },
+  {
+    name: "Advanced",
+    icon: "/assets/images/icon-advanced.svg",
+    monthlyPrice: 12,
+  },
+  { name: "Pro", icon: "/assets/images/icon-pro.svg", monthlyPrice: 15 },
 ];
 
 export default function SelectPlan() {
-  const { 
-    setCurrentStep, 
-    selectedPlan, 
+  const {
+    setCurrentStep,
+    selectedPlan,
     setSelectedPlan,
     isYearly,
-    setIsYearly
+    setIsYearly,
   } = useSubscription();
 
-  const handlePlanSelect = (plan: typeof plans[0]) => {
+  const handlePlanSelect = (plan: (typeof plans)[0]) => {
     setSelectedPlan({
-      name: plan.name as 'Arcade' | 'Advanced' | 'Pro',
+      name: plan.name as "Arcade" | "Advanced" | "Pro",
       price: isYearly ? plan.monthlyPrice * 10 : plan.monthlyPrice,
-      isYearly
+      isYearly,
     });
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-[hsl(213,96%,18%)]">Select your plan</h1>
-        <p className="text-gray-400">You have the option of monthly or yearly billing.</p>
+    <div className="gap-10 flex flex-col h-full">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold text-marine-blue">
+          Select your plan
+        </h1>
+        <p className="text-cool-gray text-sm">
+          You have the option of monthly or yearly billing.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {plans.map((plan) => (
-          <Card
-            key={plan.name}
-            className={`p-4 cursor-pointer border-2 hover:border-primary ${
-              selectedPlan?.name === plan.name ? 'border-primary bg-gray-50' : ''
-            }`}
-            onClick={() => handlePlanSelect(plan)}
+      <div className="flex flex-col justify-between h-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-44">
+          {plans.map((plan) => (
+            <Card
+              key={plan.name}
+              className={cn(
+                "p-4 min-w-40 cursor-pointer border hover:border-purplish-blue",
+                selectedPlan?.name === plan.name &&
+                  "border-border-purplish-blue bg-alabaster"
+              )}
+              onClick={() => handlePlanSelect(plan)}
+            >
+              <img
+                src={plan.icon}
+                alt={plan.name}
+                className="h-10 w-10 mb-10"
+              />
+
+              <h3 className="font-bold text-marine-blue">{plan.name}</h3>
+              <p className="text-cool-gray">
+                $
+                {isYearly
+                  ? `${plan.monthlyPrice * 10}/yr`
+                  : `${plan.monthlyPrice}/mo`}
+              </p>
+              {isYearly && (
+                <p className="text-sm text-marine-blue mt-2">2 months free</p>
+              )}
+            </Card>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-center gap-4 bg-alabaster p-4 rounded-lg">
+          <span
+            className={`${!isYearly ? "text-marine-blue" : "text-cool-gray"}`}
           >
-            <plan.icon className="h-10 w-10 text-primary mb-10" />
-            <h3 className="font-bold text-[hsl(213,96%,18%)]">{plan.name}</h3>
-            <p className="text-gray-400">
-              ${isYearly ? `${plan.monthlyPrice * 10}/yr` : `${plan.monthlyPrice}/mo`}
-            </p>
-            {isYearly && (
-              <p className="text-sm text-[hsl(213,96%,18%)]">2 months free</p>
-            )}
-          </Card>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-center gap-4 bg-gray-50 p-4 rounded-lg">
-        <span className={`${!isYearly ? 'text-[hsl(213,96%,18%)]' : 'text-gray-400'}`}>Monthly</span>
-        <Switch
-          checked={isYearly}
-          onCheckedChange={setIsYearly}
-        />
-        <span className={`${isYearly ? 'text-[hsl(213,96%,18%)]' : 'text-gray-400'}`}>Yearly</span>
-      </div>
-
-      <div className="flex justify-between">
-        <Button
-          variant="ghost"
-          onClick={() => setCurrentStep(1)}
-        >
-          Go Back
-        </Button>
-        <Button
-          onClick={() => setCurrentStep(3)}
-          disabled={!selectedPlan}
-        >
-          Next Step
-        </Button>
+            Monthly
+          </span>
+          <Switch
+            checked={isYearly}
+            onCheckedChange={setIsYearly}
+            className="bg-marine-blue"
+          />
+          <span
+            className={`${isYearly ? "text-marine-blue" : "text-cool-gray"}`}
+          >
+            Yearly
+          </span>
+        </div>
+        <div className="flex justify-between pt-20">
+          <Button
+            variant="ghost"
+            onClick={() => setCurrentStep(1)}
+            className="text-cool-gray hover:text-marine-blue hover:bg-white pl-0"
+          >
+            Go Back
+          </Button>
+          <Button
+            size="lg"
+            variant="default"
+            onClick={() => setCurrentStep(3)}
+            disabled={!selectedPlan}
+            className="bg-marine-blue hover:bg-marine-blue/90"
+          >
+            Next Step
+          </Button>
+        </div>
       </div>
     </div>
   );
