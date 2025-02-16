@@ -28,7 +28,8 @@ export default function AddOns() {
           {addons.map((addon, index) => (
             <div
               key={addon.name}
-              className={`flex items-center justify-between p-4 border rounded-lg hover:border-purplish-blue ${
+              onClick={() => toggleAddon(index)}
+              className={`flex items-center justify-between p-4 border rounded-lg hover:border-purplish-blue cursor-pointer ${
                 addon.selected ? "border-purplish-blue bg-alabaster" : ""
               }`}
             >
