@@ -6,11 +6,9 @@ import AddOns from "./steps/add-ons";
 import Summary from "./steps/summary";
 import { Card } from "@/components/ui/card";
 import Thankyou from "./thankyou";
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
 
 export default function FormLayout() {
-  const { currentStep, setCurrentStep } = useSubscription();
+  const { currentStep } = useSubscription();
 
   const renderStep = () => {
     switch (currentStep) {
@@ -36,7 +34,7 @@ export default function FormLayout() {
       </section>
 
       <span className="mb-20 mx-4 md:mb-0 md:mx-0">
-        <Card className="w-full max-w-[56rem] md:min-h-[40rem] p-4 md:p-4 grid grid-cols-1 md:grid-cols-[274px,1fr] gap-4 bg-white rounded-xl z-10 relative -top-14">
+        <Card className="w-full max-w-[56rem] md:min-h-[40rem] p-4 md:p-4 grid grid-cols-1 md:grid-cols-[274px,1fr] gap-4 bg-white rounded-xl z-10 relative -top-14 md:-top-0">
           <section className="hidden md:block">
             <StepSidebar />
           </section>

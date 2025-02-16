@@ -17,6 +17,7 @@ export default function Summary() {
     );
 
   const handleConfirm = () => {
+    setCurrentStep(5)
     toast({
       title: "Success!",
       description: "Your subscription has been confirmed.",
