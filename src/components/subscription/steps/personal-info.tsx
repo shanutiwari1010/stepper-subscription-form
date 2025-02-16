@@ -53,7 +53,7 @@ export default function PersonalInfo() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col justify-between h-full text-marine-blue"
+          className="flex flex-col gap-12 justify-between h-full text-marine-blue"
         >
           <div className="space-y-6">
             <FormField

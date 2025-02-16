@@ -15,7 +15,7 @@ export default function AddOns() {
   };
 
   return (
-    <div className="flex flex-col h-full gap-10 min-w-96">
+    <div className="flex flex-col h-full gap-10 md:min-w-96">
       <div className="space-y-2">
         <h1 className="text-3xl font-bold text-marine-blue">Pick add-ons</h1>
         <p className="text-cool-gray text-sm">
@@ -23,7 +23,7 @@ export default function AddOns() {
         </p>
       </div>
 
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col gap-12 justify-between h-full">
         <div className="space-y-4">
           {addons.map((addon, index) => (
             <div

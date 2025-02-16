@@ -24,7 +24,7 @@ export default function Summary() {
   };
 
   return (
-    <div className="flex flex-col h-full gap-10 min-w-96">
+    <div className="flex flex-col h-full gap-10 md:min-w-96">
       <div className="space-y-2">
         <h1 className="text-3xl font-bold text-marine-blue">Finishing up</h1>
         <p className="text-cool-gray text-sm">
@@ -32,7 +32,7 @@ export default function Summary() {
         </p>
       </div>
 
-      <div className="flex flex-col h-full justify-between">
+      <div className="flex flex-col gap-12 h-full justify-between">
         <div className="space-y-6">
           <Card className="p-6 bg-alabaster shadow-none border-none">
             <div className="flex justify-between items-center border-b pb-5">

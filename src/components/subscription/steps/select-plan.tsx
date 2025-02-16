@@ -42,34 +42,32 @@ export default function SelectPlan() {
         </p>
       </div>
 
-      <div className="flex flex-col justify-between h-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-44">
+      <div className="flex flex-col justify-between h-full gap-10 md:gap-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:h-44">
           {plans.map((plan) => (
             <Card
               key={plan.name}
               className={cn(
-                "p-4 min-w-40 cursor-pointer border hover:border-purplish-blue",
+                "flex flex-row md:flex-col gap-4 md:gap-10 p-4 min-w-40 h-fit cursor-pointer border hover:border-purplish-blue",
                 selectedPlan?.name === plan.name &&
                   "border-border-purplish-blue bg-alabaster"
               )}
               onClick={() => handlePlanSelect(plan)}
             >
-              <img
-                src={plan.icon}
-                alt={plan.name}
-                className="h-10 w-10 mb-10"
-              />
+              <img src={plan.icon} alt={plan.name} className="h-10 w-10" />
 
-              <h3 className="font-bold text-marine-blue">{plan.name}</h3>
-              <p className="text-cool-gray">
-                $
-                {isYearly
-                  ? `${plan.monthlyPrice * 10}/yr`
-                  : `${plan.monthlyPrice}/mo`}
-              </p>
-              {isYearly && (
-                <p className="text-sm text-marine-blue mt-2">2 months free</p>
-              )}
+              <div className="flex flex-col gap-1">
+                <h3 className="font-bold text-marine-blue">{plan.name}</h3>
+                <p className="text-cool-gray">
+                  $
+                  {isYearly
+                    ? `${plan.monthlyPrice * 10}/yr`
+                    : `${plan.monthlyPrice}/mo`}
+                </p>
+                {isYearly && (
+                  <p className="text-sm text-marine-blue">2 months free</p>
+                )}
+              </div>
             </Card>
           ))}
         </div>
@@ -91,7 +89,7 @@ export default function SelectPlan() {
             Yearly
           </span>
         </div>
-        <div className="flex justify-between pt-20">
+        <div className="flex justify-between pt-12 md:pt-20">
           <Button
             variant="ghost"
             onClick={() => setCurrentStep(1)}

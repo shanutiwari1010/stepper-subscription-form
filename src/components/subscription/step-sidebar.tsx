@@ -11,7 +11,7 @@ export default function StepSidebar() {
   const { currentStep } = useSubscription();
 
   return (
-    <aside className="flex md:block justify-center gap-4 md:gap-8 p-8 bg-[url('/assets/images/bg-sidebar-desktop.svg')] bg-no-repeat bg-center bg-cover rounded-lg text-white h-full">
+    <aside className="flex md:block justify-center gap-4 md:gap-8 p-8 bg-[url('/assets/images/bg-sidebar-mobile.svg')] md:bg-[url('/assets/images/bg-sidebar-desktop.svg')] bg-no-repeat bg-center bg-cover md:rounded-lg text-white h-44 md:h-full">
       {steps.map((step) => (
         <div key={step.number} className="flex items-center gap-4 my-1">
           <div
@@ -25,7 +25,9 @@ export default function StepSidebar() {
             {step.number}
           </div>
           <div className="hidden md:block">
-            <p className="text-sm text-cool-gray font-normal">{step.subtitle}</p>
+            <p className="text-sm text-cool-gray font-normal">
+              {step.subtitle}
+            </p>
             <p className="font-bold text-sm mb-5">{step.title}</p>
           </div>
         </div>
